@@ -28,11 +28,12 @@ async function updateGist(stats) {
   const lines = [];
   for (let i = 0; i < Math.min(stats.data.languages.length, 4); i++) {
     const data = stats.data.languages[i];
-    const { name, text: time } = data;
+    const { name, percent, text: time } = data;
 
     const line = [
       name.padEnd(11),
       time.padStart(14) + " ",
+      unicodeProgressBar(percent + 15)
     ];
 
     lines.push(line.join(" "));
@@ -74,7 +75,7 @@ const bar_styles = [
   "⚪⚫"
 ];
 
-function unicodeProgressBar(p, style = 7, min_size = 20, max_size = 20) {
+function unicodeProgressBar(p, style = 0, min_size = 20, max_size = 20) {
   let d;
   let full;
   let m;
